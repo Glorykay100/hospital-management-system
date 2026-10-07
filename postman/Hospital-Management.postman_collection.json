@@ -1,0 +1,202 @@
+{
+  "info": {
+    "name": "Hospital Management System",
+    "description": "Full API collection for MediCore Hospital Management System",
+    "_postman_id": "hms-collection-v1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": { "method": "GET", "url": "{{baseUrl}}/health" }
+        }
+      ]
+    },
+    {
+      "name": "Patients",
+      "item": [
+        {
+          "name": "List Patients",
+          "request": { "method": "GET", "url": "{{baseUrl}}/patients" }
+        },
+        {
+          "name": "Get Patient by ID",
+          "request": { "method": "GET", "url": "{{baseUrl}}/patients/1" }
+        },
+        {
+          "name": "Create Patient",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/patients",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Test Patient\",\n  \"dateOfBirth\": \"1990-05-15\",\n  \"gender\": \"male\",\n  \"phone\": \"+2348001234567\",\n  \"email\": \"test.patient@example.com\",\n  \"address\": \"123 Test Street, Lagos\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Patient",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/patients/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Updated Name\",\n  \"phone\": \"+2348009999999\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Patient",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/patients/1" }
+        }
+      ]
+    },
+    {
+      "name": "Wards",
+      "item": [
+        {
+          "name": "List Wards",
+          "request": { "method": "GET", "url": "{{baseUrl}}/wards" }
+        },
+        {
+          "name": "Get Ward by ID",
+          "request": { "method": "GET", "url": "{{baseUrl}}/wards/1" }
+        },
+        {
+          "name": "Create Ward",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/wards",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Surgical Ward B\",\n  \"wardType\": \"General\",\n  \"capacity\": 12\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Ward",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/wards/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"capacity\": 15\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Ward",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/wards/1" }
+        }
+      ]
+    },
+    {
+      "name": "Doctors",
+      "item": [
+        {
+          "name": "List Doctors",
+          "request": { "method": "GET", "url": "{{baseUrl}}/doctors" }
+        },
+        {
+          "name": "Get Doctor by ID",
+          "request": { "method": "GET", "url": "{{baseUrl}}/doctors/1" }
+        },
+        {
+          "name": "Create Doctor",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/doctors",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Dr. Test Doctor\",\n  \"specialization\": \"Surgery\",\n  \"email\": \"dr.test@hospital.com\",\n  \"phone\": \"+2348009005555\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Doctor",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/doctors/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"specialization\": \"Cardiothoracic Surgery\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Doctor",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/doctors/1" }
+        }
+      ]
+    },
+    {
+      "name": "Assignments",
+      "item": [
+        {
+          "name": "List All Assignments",
+          "request": { "method": "GET", "url": "{{baseUrl}}/assignments" }
+        },
+        {
+          "name": "List Active Assignments",
+          "request": { "method": "GET", "url": "{{baseUrl}}/assignments?status=active" }
+        },
+        {
+          "name": "Get Assignment by ID",
+          "request": { "method": "GET", "url": "{{baseUrl}}/assignments/1" }
+        },
+        {
+          "name": "Create Assignment (Assign to Ward)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/assignments",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patientId\": 2,\n  \"wardId\": 1,\n  \"doctorId\": 1,\n  \"notes\": \"Post-operative care required.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Discharge Patient",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/assignments/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"discharged\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Transfer Patient",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/assignments/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"transferred\",\n  \"notes\": \"Transferred to specialist facility.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Assignment",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/assignments/1" }
+        }
+      ]
+    }
+  ]
+}
